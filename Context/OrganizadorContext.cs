@@ -11,5 +11,14 @@ namespace TrilhaApiDesafio.Context
         }
 
         public DbSet<Tarefa> Tarefas { get; set; }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            var tarefa = modelBuilder.Entity<Tarefa>();
+            tarefa.ToTable("tb_tarefa");
+            tarefa.HasKey(x => x.Id);
+            tarefa.Property(x => x.Id).ValueGeneratedOnAdd();
+            
+        }
     }
 }
